@@ -49,6 +49,7 @@ class Mdimport extends CI_Model {
 			'CA9',
 			'CL1'
 		];
+		// tes
 		//jaga-jaga cwa10-19.. wkwkw || masak ?? wowww
 		$query = "INSERT INTO tb_penjualan VALUES";
 		foreach($reader as $row){

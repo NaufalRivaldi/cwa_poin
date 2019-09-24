@@ -33,7 +33,7 @@
 					<div class="col-xs-8 col-sm-6 col-md-8">
 						<select name="divisi" class="form-control">
 							<?php
-							$list = ['','CW1','CW2','CW3','CW4','CW5','CW6','CW7','CW8','CW9','CA0','CA1','CA2','CA3','CA4','CA5','CA6','CA7','CA8','CA9','CL1','CL2','Gudang'];
+							$list = ['','CW1','CW2','CW3','CW4','CW5','CW6','CW7','CW8','CW9','CA0','CA1','CA2','CA3','CA4','CA5','CA6','CA7','CA8','CA9','CL1','CL2','CS1','Gudang'];
 							foreach($list as $l){
 								echo "<option value='$l'>$l</option>";
 							}

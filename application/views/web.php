@@ -50,6 +50,7 @@ if(isset($_GET['tgl_a']) and isset($_GET['tgl_b'])){
 			$array['skor'][$n]['kd_barang'] = $rc['kd_barang'];
 			$array['skor'][$n]['jml'] = $rc['jml'];
 			$array['skor'][$n]['skor'] = $rc['skor'];
+			$array['skor'][$n]['brt'] = $rc['brt'];
 			$n++;
 		}
 

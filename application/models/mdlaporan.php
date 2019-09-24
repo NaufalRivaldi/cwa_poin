@@ -269,6 +269,9 @@ class Mdlaporan extends CI_Model {
 
 			$batch = array();
 			foreach($kriteria->result_array() as $r){
+				// ambil berat dari penjualan sesuai id
+				$brt = $this->db->where('id', $r['id'])->get('tb_penjualan')->row();
+				
 				$divisi = $r['kd_gudang'];
 				$tgl = $r['tgl'];
 				$kd_sales = $r['kd_sales'];
@@ -276,6 +279,7 @@ class Mdlaporan extends CI_Model {
 				$divisi = $r['kd_gudang'];
 				$jml = $r['jml'];
 				$skor = $jml * $row['skor'];
+				$brt = $brt->brt;
 
 				$batch[] = array(
 					"id" => null,
@@ -284,10 +288,11 @@ class Mdlaporan extends CI_Model {
 					"divisi" => $divisi,
 					"kd_barang" => $kd_barang,
 					"jml" => $jml,
-					"skor" => $skor
+					"skor" => $skor,
+					"brt" => $brt
 				);
 
-//				$ins = $this->db->query("INSERT INTO tb_history_jual VALUES (NULL, '$kd_sales', '$tgl', '$divisi', '$kd_barang', '$jml', '$skor')");
+//				$ins = $this->db->query("INSERT INTO tb_history_jual VALUES (NULL, '$kd_sales', '$tgl', '$divisi', '$kd_barang', '$jml', '$skor', '$brt')");
 			}
 
 			if(count($batch) > 0)
