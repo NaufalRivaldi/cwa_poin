@@ -47,7 +47,8 @@ class Mdimport extends CI_Model {
 			'CA7',
 			'CA8',
 			'CA9',
-			'CL1'
+			'CL1',
+			'CS1'
 		];
 		// tes
 		//jaga-jaga cwa10-19.. wkwkw || masak ?? wowww
