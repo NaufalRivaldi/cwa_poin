@@ -60,7 +60,7 @@ class Add extends CI_Controller {
 			$this->load->model("mdproduk");
 			$list = ["rule_name","kd_merk","kd_satuan","kd_golongan","kd_jenis","kd_barang","skor"];
 
-			$rule_name = $_POST['rule_name'];
+			$rule_name = strtoupper($_POST['rule_name']);
 			$kd_merk = $_POST['kd_merk'];
 			$kd_satuan = $_POST['kd_satuan'];
 			$kd_golongan = $_POST['kd_golongan'];

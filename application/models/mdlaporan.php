@@ -239,28 +239,40 @@ class Mdlaporan extends CI_Model {
 		foreach($query->result_array() as $row){
 			if($row['kd_barang'] <> ""){
 				$output = "kd_barang = ".$this->db->escape($row['kd_barang']);
+
+				$kriteria = $this->db->where('kd_barang', $row['kd_barang'])->get('vw_penjualan')->result();
 			}
 			else{
 				$out = [];
+				$kd_merk = '';
+				$kd_golongan = '';
+				$kd_satuan = '';
+				$kd_jenis = '';
+
 				if($row['kd_merk'] <> ""){
-					array_push($out,"kd_merk = ".$this->db->escape($row['kd_merk']));
+					$kd_merk = $row['kd_merk'];
 				}
 				if($row['kd_golongan'] <> ""){
-					array_push($out,"kd_golongan = ".$this->db->escape($row['kd_golongan']));
+					$kd_golongan = $row['kd_golongan'];
 				}
 				if($row['kd_satuan'] <> ""){
-					array_push($out,"kd_satuan = ".$this->db->escape($row['kd_satuan']));
+					$kd_satuan = $row['kd_satuan'];
 				}
 				if($row['kd_jenis'] <> ""){
 					#TAI SALAH KETIK JANCUK
-					array_push($out,"kd_jenis = ".$this->db->escape($row['kd_jenis']));
+					$kd_jenis = $row['kd_jenis'];
 				}
 
-				$output = implode(" AND ",$out);
+				// SEHARIAN BENERIN NI BUG SISTEM SKOR DOBEL" JAK NGESELIN ANJAY!!
+				$kriteria = $this->db->where('kd_merk', $kd_merk)
+						->like('kd_golongan', $kd_golongan)
+						->like('kd_satuan', $kd_satuan)
+						->like('kd_jenis', $kd_jenis)
+						->get('vw_penjualan')->result();
 			}
 
 			//GENERATE QUERY KRITERIA
-			$kriteria = $this->db->query($qwajib.$output);
+			// $kriteria = $this->db->query($qwajib.$output);
 
 			/*
 			10 November 2016
@@ -268,16 +280,24 @@ class Mdlaporan extends CI_Model {
 			*/
 
 			$batch = array();
-			foreach($kriteria->result_array() as $r){
+			foreach($kriteria as $r){
+				$brt = '';
+				$divisi = '';
+				$tgl = '';
+				$kd_sales = '';
+				$kd_barang = '';
+				$divisi = '';
+				$jml = '';
+				$skor = '';
 				// ambil berat dari penjualan sesuai id
-				$brt = $this->db->where('id', $r['id'])->get('tb_penjualan')->row();
+				$brt = $this->db->where('id', $r->id)->get('tb_penjualan')->row();
 				
-				$divisi = $r['kd_gudang'];
-				$tgl = $r['tgl'];
-				$kd_sales = $r['kd_sales'];
-				$kd_barang = $r['kd_barang'];
-				$divisi = $r['kd_gudang'];
-				$jml = $r['jml'];
+				$divisi = $r->kd_gudang;
+				$tgl = $r->tgl;
+				$kd_sales = $r->kd_sales;
+				$kd_barang = $r->kd_barang;
+				$divisi = $r->kd_gudang;
+				$jml = $r->jml;
 				$skor = $jml * $row['skor'];
 				$brt = $brt->brt;
 
@@ -297,7 +317,6 @@ class Mdlaporan extends CI_Model {
 
 			if(count($batch) > 0)
 				$execute_insert = $this->db->insert_batch("tb_history_jual", $batch);
-
 
 		}
 

@@ -26,7 +26,7 @@ class Mdimport extends CI_Model {
 		$reader = new SpreadsheetReader("upload/".$this->name);
 		$no = 1;
 
-
+		// Nambah" rule banyak aja jadinya kamprettt!, klo mau nambah disini aja
 		$allowedEntity = [
 			'CW1',
 			'CW2',
@@ -50,13 +50,51 @@ class Mdimport extends CI_Model {
 			'CL1',
 			'CS1'
 		];
+
+		$dissTransaction = [
+			'1CWA1',
+			'2CWA2',
+			'3CWA',
+			'4CWA',
+			'5CWA',
+			'6CWA',
+			'7CWA',
+			'8CWA',
+			'9CWA',
+			'ACW10',
+			'BA1',
+			'DA3',
+			'ECA4',
+			'FCA5',
+			'GCA6',
+			'HCA7',
+			'ICA8',
+			'JCA9',
+			'QCL1',
+			'1MXG',
+			'2MXG',
+			'3MXG',
+			'4MXG',
+			'5MXG',
+			'6MXG',
+			'7MXG',
+			'8MXG',
+			'9MXG',
+			'AMXG',
+			'CA2MXG',
+			'EMXG',
+			'GMXG',
+			'HMXG',
+			'JMXG9',
+			'QMXG'
+		];
 		// tes
 		//jaga-jaga cwa10-19.. wkwkw || masak ?? wowww
 		$query = "INSERT INTO tb_penjualan VALUES";
 		foreach($reader as $row){
 			$tanggal = date("Y-m-d",strtotime($row[1]));
 		
-			if(in_array($row['13'],$allowedEntity)){
+			if(in_array($row['13'],$allowedEntity) && !in_array($row['2'],$dissTransaction)){
 				$query .= "(NULL, '$tanggal', '$row[13]', '$row[4]', ".$this->db->escape($row[5]).", '$row[6]', '$row[7]', '$row[9]', '$row[10]', '$row[11]', '$row[12]', '$row[14]', '$row[16]'), ";
 			}
 		}

@@ -89,7 +89,7 @@ class Edit extends CI_Controller {
 				$list = ["rule_name","kd_merk","kd_satuan","kd_golongan","kd_jenis","kd_barang","skor"];
 
 				$id = $_POST['id'];
-				$rule_name = $_POST['rule_name'];
+				$rule_name = strtoupper($_POST['rule_name']);
 				$kd_merk = $_POST['kd_merk'];
 				$kd_satuan = $_POST['kd_satuan'];
 				$kd_golongan = $_POST['kd_golongan'];
