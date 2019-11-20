@@ -23,7 +23,7 @@ class Add extends CI_Controller {
 				$this->def->create_sess($list);
 				$this->def->pesan("error","File gambar yang Anda upload terlalu besar. (Max : ".$this->def->setting_echo("max_upload")."KB)","data/karyawan");
 			}
-			elseif($this->mdkaryawan->cek_karyawans($kd_sales) > 0){
+			elseif($this->mdkaryawan->cek_karyawans($kd_sales, $divisi) > 0){
 				$this->def->create_sess($list);
 				$this->def->pesan("error","Karyawan dengan kode tersebut sudah ada di divisi tersebut. Silakan masukkan kode yang lain","data/karyawan");
 			}

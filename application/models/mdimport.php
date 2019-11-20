@@ -47,6 +47,7 @@ class Mdimport extends CI_Model {
 			'CA7',
 			'CA8',
 			'CA9',
+			'CB0',
 			'CL1',
 			'CS1'
 		];
